@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Aayushi Maheshwari">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>task2.html</title>
+  <style>
+  .outer {
+    padding: 10px;
+    margin: 10px;
+  }
+  h2 {
+    color: #00C5D5;
+  }
+  #button1, #button2, #button3 {
+    background-color: #f5b3c4;
+      padding: 10px 20px;
+      margin: 1px 1px;
+      font-size: 16px;
+      color: #00C5D5;
+      cursor: pointer;
+      }
+      #appendpara {
+        color: #00C5D5;
+      }
+      #button1:hover, #button2:hover, #button3:hover {
+        background-color: #ef8fa8;
+      }
+  </style>
+</head>
+<body>
+  <div class="outer">
+  <h2 id="inc">10</h2>
+    <button id="button1" type="button" onclick="showPopup()">Show number</button>
+    <button id="button2" onclick="incNumber()">Increment number</button>
+    <button id="button3" onclick="changeText()">Append number</button>
+  <div id="appendpara"><p id="b3text"></p></div>
+</div>
+  <script>
+  function showPopup() {
+    var x = document.getElementById("inc").textContent;
+    alert(x);
+  }
+  function incNumber() {
+    var x = document.getElementById("inc").textContent;
+    x = parseInt(x) + 1;
+    document.getElementById("inc").innerHTML = x;
+  }
+  function changeText() {
+    var x = document.createElement("p");
+    var y = document.getElementById("inc").textContent;
+    x.innerHTML = y;
+    document.getElementById("appendpara").appendChild(x);
+  }
+  </script>
+</body>
+</html>

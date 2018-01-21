@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Aayushi Maheshwari">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>task3.html</title>
+  <script src="script3.js" type="text/javascript"></script>
+  <style>
+  .header {
+      text-align:center;
+      color: #00C5D5;
+      }
+  *   {
+      box-sizing: border-box;
+      }
+  .column {
+          float:left;
+          padding: 5px;
+          }
+  .clearfix::after {
+                    content: "";
+                    clear: both;
+                    display: table;
+                    }
+  .menu {
+         width: 33%;
+        }
+  .content {
+            width: 67%;
+          }
+  .menu ul {list-style-type: none;
+            margin: 0;
+            padding: 0}
+  .menu li a {display: block;
+            padding: 15px 15px;
+            margin: 10px;
+            background-color: #f5b3c4;
+            color: #00C5D5;
+            text-decoration: none;
+            text-align: center;}
+
+   p {color: #00C5D5;}
+   .menu li a:hover {
+     background-color: #ef8fa8;
+   }
+  </style>
+</head>
+<body>
+  <div class="header"><h1>HW02 Task Three</h1></div>
+  <div class="clearfix">
+    <div class="column menu">
+        <ul>
+          <li><a href="#" onclick="changeText(1)" title="Four paragraphs of Lorem Ipsem text.">Lorem ipsem</a></li>
+          <li><a href="#" onclick="changeText(2)" title="The first four verses of 99 Bottles of Beer">99 Bottles</a></li>
+          <li><a href="#" onclick="changeText(3)" title="The text">Last Thing</a></li>
+        </ul>
+      </div>
+      <div class="column content">
+        <!-- Attribution goes to: https://www.lipsum.com/feed/html -->
+        <p id="display">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Nulla commodo sapien eget orci volutpat molestie. Donec aliquet maximus
+          purus, quis tincidunt lacus vestibulum in. Quisque venenatis tincidunt
+          ante, quis tincidunt lorem finibus quis. Ut ut quam ipsum. Vestibulum
+          consectetur tristique ex, non pulvinar erat fringilla eu. Lorem ipsum
+          dolor sit amet, consectetur adipiscing elit.<br><br>
+          Suspendisse dapibus felis ultricies ante porttitor, a fermentum magna
+bibendum. Ut interdum nec neque id rhoncus. Vestibulum dignissim convallis
+erat, at ultricies risus porta ac. Quisque sagittis luctus nulla. Morbi
+suscipit, velit in rutrum interdum, arcu tortor posuere turpis, ut
+fermentum erat ipsum in metus. Donec et lorem est.<br><br>
+Mauris consectetur tincidunt neque, ut ultricies velit suscipit sit amet.
+Donec aliquam leo in dolor semper, et posuere nulla accumsan. Donec justo
+eros, congue in ligula ac, tempus imperdiet ipsum. Sed turpis dolor, mollis
+nec enim ut, lobortis molestie ligula. Nulla leo ligula, sagittis et ex
+eget, fringilla luctus massa. Sed id porta magna.<br><br>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut at suscipit
+nisl. Nullam viverra enim orci. Suspendisse convallis tempor ligula, at
+pharetra arcu. Nunc lobortis sit amet felis a interdum. Nulla ullamcorper
+tempus massa, in vehicula arcu tristique vitae. Vivamus in elit tempus,
+posuere ipsum id, finibus nulla.<br>
+</p></div>
+</div>
+</body>
+</html>
