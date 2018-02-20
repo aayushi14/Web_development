@@ -1,0 +1,19 @@
+<h2>Show User</h2>
+
+<ul>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </li>
+
+</ul>
+
+<div class="topnav">
+  <span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
+</div>
