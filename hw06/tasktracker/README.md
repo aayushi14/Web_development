@@ -19,3 +19,8 @@ The status of the task can be checked if its complete and unchecked if incomplet
 
 The time taken field has 2 drop downs for hour and minutes.
 You need to select 00, 15, 30 or 45 from the minutes drop down to entry time taken, otherwise it will show an error and you cannot proceed to create or edit that task.
+
+Users already present in db: 
+1. Alice : alice@example.com
+2. admin : admin@example.com
+3. Admin : admin1@example.com
