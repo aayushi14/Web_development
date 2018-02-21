@@ -15,6 +15,10 @@ The Tasks are listed in 2 tables:
 1. Tasks assigned to logged in User: List tasks assigned to currently logged in user.
 2. All assigned tasks: Lists of tasks
 
+Create and Edit tasks:
+1. When a new task is created, the current logged in user becomes the creator of the task,
+and to assign the task to users, we get a dropdown of all the users in the db, select whomsoever you want to assign the task to.
+2. When a user wants to update the status of task assigned to him, the creator of the task stays as it is, and all other fields can be changed.
 The status of the task can be checked if its complete and unchecked if incomplete.
 
 The time taken field has 2 drop downs for hour and minutes.
