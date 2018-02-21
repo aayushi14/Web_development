@@ -35,7 +35,7 @@
             </div>
             <div class="topnav">
                 <%= link "Tasks", to: task_path(@conn, :index) %>
-                <%= if (@current_user.name == "admin" || @current_user.name == "Admin") do %>
+                <%= if (String.downcase(@current_user.name) == "admin") do %>
                   <%= link "Users", to: user_path(@conn, :index) %>
                 <% end %>
             </div>

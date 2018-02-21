@@ -67,10 +67,18 @@ defmodule TasktrackerWeb.UserController do
 
   def delete(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    {:ok, _user} = Accounts.delete_user(user)
+    cur_user = get_session(conn, :user_id)
+    admin_list = Accounts.get_admin()
+    if (Enum.member?(admin_list, user.id) && cur_user == user.id) do
+      conn
+      |> put_flash(:error, "Request another admin to delete yourself")
+      |> redirect(to: user_path(conn, :index))
+    else
+      {:ok, _user} = Accounts.delete_user(user)
 
-    conn
-    |> put_flash(:info, "User deleted successfully.")
-    |> redirect(to: user_path(conn, :index))
+      conn
+      |> put_flash(:info, "User deleted successfully.")
+      |> redirect(to: user_path(conn, :index))
+    end
   end
 end

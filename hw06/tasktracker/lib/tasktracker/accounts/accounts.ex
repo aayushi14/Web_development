@@ -110,4 +110,8 @@ defmodule Tasktracker.Accounts do
   def get_email() do
     Repo.all(from u in "users", select: u.email)
   end
+
+  def get_admin() do
+    Repo.all(from u in "users", where: ilike(u.name, "admin"), select: u.id)
+  end
 end
