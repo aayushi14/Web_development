@@ -2,7 +2,6 @@ defmodule Tasktracker.Users.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "users" do
     field :email, :string
     field :name, :string
@@ -15,15 +14,15 @@ defmodule Tasktracker.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password_hash])
-    |> validate_required([:name, :email, :password_hash])
+    |> cast(attrs, [:name, :email, :password])
+    |> validate_required([:name, :email, :password])
     |> validate_changeset
   end
 
   def registration_changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password_hash])
-    |> validate_required([:name, :email, :password_hash])
+    |> cast(attrs, [:name, :email, :password])
+    |> validate_required([:name, :email, :password])
     |> validate_changeset
   end
 
@@ -40,9 +39,22 @@ defmodule Tasktracker.Users.User do
   defp generate_password_hash(changeset) do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
-        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(password))
+        put_change(changeset, :password_hash, Comeonin.Argon2.hashpwsalt(password))
       _ ->
         changeset
+    end
+  end
+
+  def find_and_confirm_password(email, password) do
+    case Repo.get_by(User, email: email) do
+      nil ->
+        {:error, :not_found}
+      user ->
+        if Comeonin.Argon2.checkpw(password, user.password_hash) do
+          {:ok, user}
+        else
+          {:error, :unauthorized}
+        end
     end
   end
 end

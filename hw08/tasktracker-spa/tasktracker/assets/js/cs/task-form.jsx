@@ -45,13 +45,7 @@ function TaskForm(props) {
     </FormGroup>
     <FormGroup>
       <Label for="time">Time taken</Label>
-      <Input type="select" name="time" value={props.form.time} onChange={update}>
-            <option>0</option>
-            <option>15</option>
-            <option>30</option>
-            <option>45</option>
-            <option>60</option>
-      </Input>
+      <Input type="number" min="0" step="15" name="time" value={props.form.time || 0} onChange={update} />
     </FormGroup>
     <FormGroup>
       <Label for="user_id">Assign task to: </Label>

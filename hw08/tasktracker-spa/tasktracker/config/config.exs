@@ -31,7 +31,7 @@ config :logger, :console,
     allowed_drift: 2000,
     verify_issuer: true, # optional
     secret_key: "zqh+2ldyKk3pwGaqEsntAXEqQBUXbwh6OURXadZ60U9oZvI2B2bCkyVR8LCePXKS",
-    serializer: MyAppName.GuardianSerializer
+    serializer: Tasktracker.GuardianSerializer
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
