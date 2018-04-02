@@ -20,6 +20,11 @@ let LoginForm = connect(({login}) => {return {login};})((props) => {
     console.log(props.login);
   }
 
+  function create_user(ev) {
+    api.submit_create_user(props.login);
+    console.log(props.login);
+  }
+
   return <div className="navbar-text">
     <Form inline>
       <FormGroup>
@@ -30,7 +35,8 @@ let LoginForm = connect(({login}) => {return {login};})((props) => {
         <Input type="password" name="pass" placeholder="password"
                value={props.login.pass} onChange={update} />
       </FormGroup>
-      <Button color="primary" onClick={create_token}>Log In</Button>
+      <Button onClick={create_token} color="primary">Log In</Button>&nbsp;
+      <Button onClick={create_user} color="primary">Register</Button>
     </Form>
   </div>;
 });
