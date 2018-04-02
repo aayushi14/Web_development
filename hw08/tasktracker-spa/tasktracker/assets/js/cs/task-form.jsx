@@ -8,7 +8,13 @@ function TaskForm(props) {
     let tgt = $(ev.target);
 
     let data = {};
-    data[tgt.attr('name')] = tgt.val();
+    if (tgt.attr('name') == "completed") {
+      data["completed"] = $(tgt).is(':checked') ? 'true' : 'false';
+    }
+    else {
+      data[tgt.attr('name')] = tgt.val();
+    }
+
     let action = {
       type: 'UPDATE_FORM',
       data: data,
@@ -53,7 +59,7 @@ function TaskForm(props) {
         { users }
       </Input>
     </FormGroup>
-    <Button onClick={submit} color="success">Submit</Button> &nbsp; &nbsp; &nbsp;
+    <Button onClick={submit} color="success">Create Task</Button> &nbsp; &nbsp; &nbsp;
     <Button onClick={clear} color="danger">Clear</Button>
   </div>;
 }

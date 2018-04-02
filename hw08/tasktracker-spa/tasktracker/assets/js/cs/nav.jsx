@@ -21,7 +21,7 @@ let LoginForm = connect(({login}) => {return {login};})((props) => {
   }
 
   function create_user(ev) {
-    api.submit_create_user(props.login);
+    api.submit_new_user(props.login);
     console.log(props.login);
   }
 

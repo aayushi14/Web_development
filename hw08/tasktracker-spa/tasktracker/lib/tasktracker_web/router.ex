@@ -11,12 +11,6 @@ defmodule TasktrackerWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug Guardian.Plug.VerifyHeader
-    plug Guardian.Plug.LoadResource
-  end
-
-  pipeline :authenticated do
-    plug Guardian.Plug.EnsureAuthenticated
   end
 
   scope "/", TasktrackerWeb do
@@ -31,11 +25,6 @@ defmodule TasktrackerWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api/v1", TasktrackerWeb do
     pipe_through :api
-
-    post "/sign_up", RegistrationController, :sign_up
-    post "/sign_in", SessionController, :sign_in
-
-    pipe_through :authenticated # restrict unauthenticated access for routes below
     resources "/users", UserController, except: [:new, :edit]
     resources "/tasks", TaskController, except: [:new, :edit]
     post "/token", TokenController, :create

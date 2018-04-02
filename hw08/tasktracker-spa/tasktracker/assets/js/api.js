@@ -59,7 +59,7 @@ class TheServer {
     });
   }
 
-  submit_create_user(data) {
+  submit_new_user(data) {
     $.ajax("/api/v1/users", {
       method: "post",
       dataType: "json",
