@@ -59,6 +59,8 @@ function token(state = null, action) {
   switch (action.type) {
     case 'SET_TOKEN':
       return action.token;
+    case 'RESET_TOKEN':
+      return state;
     default:
       return state;
   }

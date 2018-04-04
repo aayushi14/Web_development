@@ -22,7 +22,7 @@ let LoginForm = connect(({login}) => {return {login};})((props) => {
   return <div className="navbar-text">
     <Form inline>
       <FormGroup>
-        <Input type="text" name="email" placeholder="email"
+        <Input type="email" name="email" placeholder="abc@example.com"
                value={props.login.email} onChange={update} />
       </FormGroup>
       <FormGroup>
@@ -37,11 +37,12 @@ let LoginForm = connect(({login}) => {return {login};})((props) => {
 let Session = connect(({token}) => {return {token};})((props) => {
 
   function logout(ev) {
-    location.reload(true);
+    window.location.reload();
+    // api.submit_logout(props.token);
   }
 
   return <div className="navbar-text">
-    User id = { props.token.user_id } &nbsp;
+    Welcome id = { props.token.user_id } &nbsp;
     <Link onClick={ logout } className="btn btn-danger" to={"/"}>Logout</Link>
   </div>;
 });

@@ -40,6 +40,10 @@ class TheServer {
           type: 'ADD_TASK',
           task: resp.data,
         });
+        alert("Task created successfully!");
+      },
+      error: (resp) => {
+        alert(resp.task_id);
       },
     });
   }
@@ -52,6 +56,9 @@ class TheServer {
       data: JSON.stringify({ token: data.token, task: data }),
       success: (resp) => {
         this.request_tasks();
+      },
+      error: (resp) => {
+        alert(resp.task_id);
       },
     });
   }
@@ -85,6 +92,28 @@ class TheServer {
           type: 'ADD_USER',
           user: resp.data,
         });
+        alert("Registered successfully!");
+      },
+      error: (resp) => {
+        alert(resp.user_id);
+      },
+    });
+  }
+
+  submit_logout(data) {
+    $.ajax("/api/v1/token/logout", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify(data),
+      success: (resp) => {
+        store.dispatch({
+          type: 'RESET_TOKEN',
+          token: resp,
+        });
+      },
+      error: (resp) => {
+        alert(resp.user_id);
       },
     });
   }

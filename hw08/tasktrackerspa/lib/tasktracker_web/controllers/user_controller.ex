@@ -16,7 +16,7 @@ defmodule TasktrackerWeb.UserController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", user_path(conn, :show, user))
-      |> render(conn, "show.json", user: user)
+      |> render("show.json", user: user)
     end
   end
 

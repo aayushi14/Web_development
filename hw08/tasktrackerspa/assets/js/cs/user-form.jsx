@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import api from '../api';
 
 function UserForm(params) {
@@ -20,7 +21,6 @@ function UserForm(params) {
   function submit(ev) {
     var new_user = {name: params.form.name, email: params.form.email, password: params.form.pass}
     api.submit_user(new_user);
-    location.reload(true);
   }
 
   function clear(ev) {
@@ -31,20 +31,22 @@ function UserForm(params) {
 
   return <div style={{padding: "4ex"}}>
     <h3>New User</h3>
-    <FormGroup>
-      <Label for="name">Name</Label>
-      <Input name="name" value={params.form.name} placeholder="Abc" onChange={update} />
-    </FormGroup>
-    <FormGroup>
-      <Label for="email">Email</Label>
-      <Input type="email" name="email" value={params.form.email} placeholder="abc@example.com" onChange={update} />
-    </FormGroup>
-    <FormGroup>
-      <Label for="pass">Password</Label>
-        <Input type="password" name="pass" value={params.form.pass} placeholder="password" onChange={update} />
-    </FormGroup>
-    <Button onClick={submit} color="success">Register</Button> &nbsp; &nbsp;
-    <Button onClick={clear} color="danger">Clear</Button>
+    <Form>
+      <FormGroup>
+        <Label for="name">Name</Label>
+        <Input name="name" value={params.form.name} placeholder="Abc" onChange={update} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="email">Email</Label>
+        <Input type="email" name="email" value={params.form.email} placeholder="abc@example.com" onChange={update} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="pass">Password</Label>
+          <Input type="password" name="pass" value={params.form.pass} placeholder="password" onChange={update} />
+      </FormGroup>
+      <Link onClick={submit} to={"/"} className="btn btn-success">Register</Link> &nbsp; &nbsp;
+      <Button onClick={clear} color="danger">Clear</Button>
+    </Form>
   </div>;
 }
 

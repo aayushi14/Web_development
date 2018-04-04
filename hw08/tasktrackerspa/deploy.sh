@@ -2,7 +2,7 @@
 
 export PORT=5130
 export MIX_ENV=prod
-export GIT_PATH=/home/tasktrackerspa/tasktrackerspa
+export GIT_PATH=/home/tasktrackerspa/tasktracker
 
 PWD=`pwd`
 if [ $PWD != $GIT_PATH ]; then
@@ -11,8 +11,8 @@ if [ $PWD != $GIT_PATH ]; then
 	exit 1
 fi
 
-if [ $USER != "tasktracker" ]; then
-	echo "Error: must run as user 'tasktracker'"
+if [ $USER != "tasktrackerspa" ]; then
+	echo "Error: must run as user 'tasktrackerspa'"
 	echo "  Current user is $USER"
 	exit 2
 fi
@@ -37,7 +37,7 @@ REL_TAR=~/tasktracker/_build/prod/rel/tasktracker/releases/0.0.1/tasktracker.tar
 (cd ~/www/tasktracker && tar xzvf $REL_TAR)
 
 crontab - <<CRONTAB
-@reboot bash /home/tasktracker/tasktracker/start.sh
+@reboot bash /home/tasktrackerspa/tasktracker/start.sh
 CRONTAB
 
 #. start.sh

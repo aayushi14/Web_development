@@ -48489,6 +48489,10 @@ var TheServer = function () {
             type: 'ADD_TASK',
             task: resp.data
           });
+          alert("Task created successfully!");
+        },
+        error: function error(resp) {
+          alert(resp.task_id);
         }
       });
     }
@@ -48504,6 +48508,9 @@ var TheServer = function () {
         data: JSON.stringify({ token: data.token, task: data }),
         success: function success(resp) {
           _this.request_tasks();
+        },
+        error: function error(resp) {
+          alert(resp.task_id);
         }
       });
     }
@@ -48539,6 +48546,29 @@ var TheServer = function () {
             type: 'ADD_USER',
             user: resp.data
           });
+          alert("Registered successfully!");
+        },
+        error: function error(resp) {
+          alert(resp.user_id);
+        }
+      });
+    }
+  }, {
+    key: "submit_logout",
+    value: function submit_logout(data) {
+      $.ajax("/api/v1/token/logout", {
+        method: "post",
+        dataType: "json",
+        contentType: "application/json; charset=UTF-8",
+        data: JSON.stringify(data),
+        success: function success(resp) {
+          _store2.default.dispatch({
+            type: 'RESET_TOKEN',
+            token: resp
+          });
+        },
+        error: function error(resp) {
+          alert(resp.user_id);
         }
       });
     }
@@ -48831,7 +48861,7 @@ var LoginForm = (0, _reactRedux.connect)(function (_ref) {
       _react2.default.createElement(
         _reactstrap.FormGroup,
         null,
-        _react2.default.createElement(_reactstrap.Input, { type: 'text', name: 'email', placeholder: 'email',
+        _react2.default.createElement(_reactstrap.Input, { type: 'email', name: 'email', placeholder: 'abc@example.com',
           value: props.login.email, onChange: update })
       ),
       _react2.default.createElement(
@@ -48856,13 +48886,14 @@ var Session = (0, _reactRedux.connect)(function (_ref2) {
 })(function (props) {
 
   function logout(ev) {
-    location.reload(true);
+    window.location.reload();
+    // api.submit_logout(props.token);
   }
 
   return _react2.default.createElement(
     'div',
     { className: 'navbar-text' },
-    'User id = ',
+    'Welcome id = ',
     props.token.user_id,
     ' \xA0',
     _react2.default.createElement(
@@ -49384,6 +49415,8 @@ var _reactRedux = require('react-redux');
 
 var _reactstrap = require('reactstrap');
 
+var _reactRouterDom = require('react-router-dom');
+
 var _api = require('../api');
 
 var _api2 = _interopRequireDefault(_api);
@@ -49407,7 +49440,6 @@ function UserForm(params) {
   function submit(ev) {
     var new_user = { name: params.form.name, email: params.form.email, password: params.form.pass };
     _api2.default.submit_user(new_user);
-    location.reload(true);
   }
 
   function clear(ev) {
@@ -49425,45 +49457,49 @@ function UserForm(params) {
       'New User'
     ),
     _react2.default.createElement(
-      _reactstrap.FormGroup,
+      _reactstrap.Form,
       null,
       _react2.default.createElement(
-        _reactstrap.Label,
-        { 'for': 'name' },
-        'Name'
+        _reactstrap.FormGroup,
+        null,
+        _react2.default.createElement(
+          _reactstrap.Label,
+          { 'for': 'name' },
+          'Name'
+        ),
+        _react2.default.createElement(_reactstrap.Input, { name: 'name', value: params.form.name, placeholder: 'Abc', onChange: update })
       ),
-      _react2.default.createElement(_reactstrap.Input, { name: 'name', value: params.form.name, placeholder: 'Abc', onChange: update })
-    ),
-    _react2.default.createElement(
-      _reactstrap.FormGroup,
-      null,
       _react2.default.createElement(
-        _reactstrap.Label,
-        { 'for': 'email' },
-        'Email'
+        _reactstrap.FormGroup,
+        null,
+        _react2.default.createElement(
+          _reactstrap.Label,
+          { 'for': 'email' },
+          'Email'
+        ),
+        _react2.default.createElement(_reactstrap.Input, { type: 'email', name: 'email', value: params.form.email, placeholder: 'abc@example.com', onChange: update })
       ),
-      _react2.default.createElement(_reactstrap.Input, { type: 'email', name: 'email', value: params.form.email, placeholder: 'abc@example.com', onChange: update })
-    ),
-    _react2.default.createElement(
-      _reactstrap.FormGroup,
-      null,
       _react2.default.createElement(
-        _reactstrap.Label,
-        { 'for': 'pass' },
-        'Password'
+        _reactstrap.FormGroup,
+        null,
+        _react2.default.createElement(
+          _reactstrap.Label,
+          { 'for': 'pass' },
+          'Password'
+        ),
+        _react2.default.createElement(_reactstrap.Input, { type: 'password', name: 'pass', value: params.form.pass, placeholder: 'password', onChange: update })
       ),
-      _react2.default.createElement(_reactstrap.Input, { type: 'password', name: 'pass', value: params.form.pass, placeholder: 'password', onChange: update })
-    ),
-    _react2.default.createElement(
-      _reactstrap.Button,
-      { onClick: submit, color: 'success' },
-      'Register'
-    ),
-    ' \xA0 \xA0',
-    _react2.default.createElement(
-      _reactstrap.Button,
-      { onClick: clear, color: 'danger' },
-      'Clear'
+      _react2.default.createElement(
+        _reactRouterDom.Link,
+        { onClick: submit, to: "/", className: 'btn btn-success' },
+        'Register'
+      ),
+      ' \xA0 \xA0',
+      _react2.default.createElement(
+        _reactstrap.Button,
+        { onClick: clear, color: 'danger' },
+        'Clear'
+      )
     )
   );
 }
@@ -49688,6 +49724,8 @@ function token() {
   switch (action.type) {
     case 'SET_TOKEN':
       return action.token;
+    case 'RESET_TOKEN':
+      return state;
     default:
       return state;
   }
