@@ -44,6 +44,18 @@ class TheServer {
     });
   }
 
+  edit_task(data, task_id) {
+    $.ajax("/api/v1/tasks"+ "/" + task_id, {
+      method: "patch",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ token: data.token, task: data }),
+      success: (resp) => {
+        this.request_tasks();
+      },
+    });
+  }
+
   submit_login(data) {
     $.ajax("/api/v1/token", {
       method: "post",
@@ -56,19 +68,22 @@ class TheServer {
           token: resp,
         });
       },
+      error: (resp) => {
+        alert(resp.user_id);
+      },
     });
   }
 
-  submit_new_user(data) {
+  submit_user(data) {
     $.ajax("/api/v1/users", {
       method: "post",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
-      data: JSON.stringify({ token: data.token, user: data }),
+      data: JSON.stringify({ user: data }),
       success: (resp) => {
         store.dispatch({
           type: 'ADD_USER',
-          users: resp.data,
+          user: resp.data,
         });
       },
     });

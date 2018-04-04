@@ -27,15 +27,6 @@ defmodule TasktrackerWeb.TaskController do
 
   def update(conn, %{"id" => id, "task" => task_params}) do
     task = Tasks.get_task!(id)
-    IO.puts "update task"
-    IO.inspect(task)
-    # if (tgt.attr('name') == "completed") {
-    #   data["completed"] = $(tgt).is(:checked) ? 'true' : 'false';
-    # }
-    # else {
-    #   data[tgt.attr('name')] = tgt.val();
-    # }
-
     with {:ok, %Task{} = task} <- Tasks.update_task(task, task_params) do
       render(conn, "show.json", task: task)
     end

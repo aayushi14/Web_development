@@ -4,7 +4,7 @@ import { Button, FormGroup, Label, Input } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import api from '../api';
 
-function TaskForm(params) {
+function EditForm(params) {
   function update(ev) {
     let tgt = $(ev.target);
     let data = {};
@@ -17,19 +17,20 @@ function TaskForm(params) {
     }
 
     let action = {
-      type: 'UPDATE_FORM',
+      type: 'UPDATE_EDIT_FORM',
       data: data,
     };
     params.dispatch(action);
   }
 
-  function submit(ev) {
-    api.submit_task(params.form);
+  function edit(ev) {
+    var task_id = params.form.id;
+    api.edit_task(params.form, task_id);
   }
 
   let users = _.map(params.users, (uu) => <option key={uu.id} value={uu.name}>{uu.name}</option>);
   return <div style={{padding: "4ex"}}>
-    <h2>New Task</h2>
+    <h2>Edit Task</h2>
     <FormGroup>
       <Label for="title">Title</Label>
       <Input name="title" value={params.form.title} onChange={update} />
@@ -58,18 +59,17 @@ function TaskForm(params) {
         { users }
       </Input>
     </FormGroup>
-    <Button onClick={submit} color="success">Create Task</Button> &nbsp; &nbsp; &nbsp;
+    <Link onClick={edit} className="btn btn-success" to={"/"}>Update Task</Link> &nbsp;
     <Link className="btn btn-danger" to={"/"}>Cancel</Link>
   </div>;
 }
 
 function state2params(state) {
-  console.log("rerender@TaskForm", state);
   return {
-    form: state.form,
+    form: state.editform,
     users: state.users,
  };
 }
 
 // Export the result of a curried function call.
-export default connect(state2params)(TaskForm);
+export default connect(state2params)(EditForm);

@@ -28,11 +28,11 @@ defmodule Seeds do
     d = Repo.insert!(%User{ name: "Dave", email: "dave@example.com", password_hash: pd })
 
     Repo.delete_all(Task)
-    Repo.insert!(%Task{ title: "Learn Java", description: "Solve problems online", completed: false, time: 0, user_id: a.id })
-    Repo.insert!(%Task{ title: "Learn py", description: "Take online course", completed: false, time: 0, user_id: b.id })
-    Repo.insert!(%Task{ title: "Learn Racket", description: "Solve problems online", completed: true, time: 60, user_id: b.id })
-    Repo.insert!(%Task{ title: "Learn react", description: "Complete assignments", completed: true, time: 120, user_id: c.id })
-    Repo.insert!(%Task{ title: "Learn Elixir", description: "Practice problems" , completed: false, time: 0, user_id: d.id })
+    Repo.insert!(%Task{ title: "Learn Java", description: "Solve problems online", completed: false, time: 0, assignedTo: "Alice", user_id: a.id })
+    Repo.insert!(%Task{ title: "Learn py", description: "Take online course", completed: false, time: 0, assignedTo: "Bob", user_id: a.id })
+    Repo.insert!(%Task{ title: "Learn Racket", description: "Solve problems online", completed: true, time: 60, assignedTo: "Bob", user_id: a.id })
+    Repo.insert!(%Task{ title: "Learn react", description: "Complete assignments", completed: true, time: 120, assignedTo: "Carol", user_id: a.id })
+    Repo.insert!(%Task{ title: "Learn Elixir", description: "Practice problems" , completed: false, time: 0, assignedTo: "Dave", user_id: b.id })
   end
 end
 
